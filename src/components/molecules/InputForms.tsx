@@ -55,12 +55,18 @@ const InputForm: React.FC<{
 const InputFormWrapper = styled.div`
   width: fit-content;
   & {
+    // 検索ボタンと入力フォームを離した
     .el_searchFormWrapper {
       display: inline-block;
+      padding-right: 20px;
     }
 
     .el_buttonWrapper {
       display: inline-block;
+    }
+
+    .el_inputForm {
+      width: 200px;
     }
 
     .el_submitBtn {
