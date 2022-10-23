@@ -1,0 +1,28 @@
+{
+  "root": true, // .eslintrc.jsがプロジェクトのルートに配置させているか（指定がないと上位階層へ設定ファイルを探索される）
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "parser": "@typescript-eslint/parser", // ESLintにTypeScriptを理解させる
+  "plugins": [
+    "@typescript-eslint",
+    "react",
+    "react-hooks" // ESLintのTypeScriptプラグインのルールを適用できる様にする（/eslint-pluginは省略可）
+  ],
+  "extends": [
+    "eslint:recommended", // ESLintのJavaScriptルールセットを適用
+    "plugin:@typescript-eslint/eslint-recommended", // eslint:recommendedに含まれるルールを型チェックでカバーできるものは無効化
+    "plugin:@typescript-eslint/recommended", // 型チェックが不要なルールを適用
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "prettier"
+  ],
+  "rules": {
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
+    // 親コンポーネントからそのままpropsを子に渡せるようにする
+    "react/prop-types": "off"
+  }
+}
