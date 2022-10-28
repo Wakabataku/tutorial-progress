@@ -92,4 +92,7 @@ export const loginFunc = functions
       .collection("users")
       .doc(responseData.sub)
       .set(userProfile, { merge: true })
+
+    // 応答データを送信
+    await res.status(200).send(responseData)
   })
