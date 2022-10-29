@@ -3,10 +3,12 @@ import styled from "styled-components"
 
 import BookSearchForm from "../organisms/BookSearchForm"
 import BookResults from "../organisms/BookResults"
+import VerifyLineCodeQuery from "../organisms/VerifyLineCodeQuery"
 
 const App: React.FC = () => {
   return (
     <AppWrapper>
+      <VerifyLineCodeQuery />
       <BookSearchForm />
       <div className="bl_bookDisplay">
         <BookResults />

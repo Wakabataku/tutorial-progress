@@ -24,7 +24,7 @@ export interface BookItem {
 
 // エラーメッセージの型
 // エラーの処理は自分も勉強中のためテキトー．とりあえず無視
-interface ErrorMessage {
+export interface ErrorMessage {
   e_message: string | undefined
 }
 // これも無視

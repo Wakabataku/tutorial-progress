@@ -4,8 +4,9 @@ import "./index.css"
 import reportWebVitals from "./reportWebVitals"
 import { Provider } from "react-redux"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { PersistGate } from "redux-persist/integration/react"
 
-import { store } from "./store/store"
+import { store, persistor } from "./store/store"
 // App.tsxの階層も変更しよう
 import App from "./components/pages/App"
 // Layoutはこれから作成
@@ -17,9 +18,12 @@ root.render(
   // <BrowserRouter>と<Routes>, <Rout>はFunctions側のコード作成後の後半部で解説
   <Provider store={store}>
     <BrowserRouter>
-      <Routes>
-        <Route path={"/"} element={<Layout Main={App} />} />
-      </Routes>
+      {/* PersistGateで囲んだ箇所にpersistが適用される */}
+      <PersistGate loading={null} persistor={persistor}>
+        <Routes>
+          <Route path={"/"} element={<Layout Main={App} />} />
+        </Routes>
+      </PersistGate>
     </BrowserRouter>
   </Provider>
 )
