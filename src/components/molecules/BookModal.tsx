@@ -6,24 +6,32 @@ import Button from "../atoms/Button"
 const BookModal: React.FC<{
   props: {
     bookIcon: JSX.Element
+    onSubmit: () => void
+    isLogin: boolean
   }
 }> = ({ props }) => {
   const onClickSubmit = () => {
-    alert("（仮）書籍を登録しました。")
-    console.log("submit!!")
+    alert("書籍を登録しました。")
+    props.onSubmit()
   }
   return (
     <BookModalWrapper>
       <div className="el_bookModal">{props.bookIcon}</div>
-      <div className="el_submitBtnWrapper">
-        <Button
-          props={{
-            onClick: () => onClickSubmit(),
-            text: "登録",
-            className: "el_submitBtn",
-          }}
-        />
-      </div>
+      {props.isLogin ? (
+        <div className="el_submitBtnWrapper">
+          <Button
+            props={{
+              onClick: () => onClickSubmit(),
+              text: "登録",
+              className: "el_submitBtn",
+            }}
+          />
+        </div>
+      ) : (
+        <div className="el_loginInstruction">
+          <a>ログインしてください</a>
+        </div>
+      )}
     </BookModalWrapper>
   )
 }
@@ -43,6 +51,17 @@ const BookModalWrapper = styled.div`
     }
     .el_submitBtn {
       padding: 5px 10px;
+    }
+    .el_loginInstruction {
+      margin: 0 auto;
+      width: fit-content;
+      background-color: #ea5549;
+      padding: 5px;
+      cursor: default;
+      a {
+        color: #fff;
+        font-weight: 900;
+      }
     }
   }
 `

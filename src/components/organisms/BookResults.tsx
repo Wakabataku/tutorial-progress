@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react"
 import styled from "styled-components"
-import { useAppSelector } from "../../store/store"
+import { useAppSelector, AppDispatch, useAppDispatch } from "../../store/store"
 
 import BookMedia from "../molecules/BookMedia"
 import BookModal from "../molecules/BookModal"
 import Modal from "../atoms/Modal"
+import { setFavoriteBook } from "../../store/favoriteBookSlice"
+import { BookItem } from "../../../functions/src/types"
 
 const BookResults: React.FC = () => {
   const books = useAppSelector((state) => state.book.books)
-  // books.itemsからidを取り除いたvolumeInfoだけを抜き出すことができる
-  // そのため，volumeInfoはVolumeInfo[]型である
-  const volumeInfo = books.items.map((item) => item.volumeInfo)
+  const loginState = useAppSelector((state) => state.login)
+
+  const dispatch: AppDispatch = useAppDispatch()
 
   // Modalを表示するためには2つの状態を管理する必要がある
   // 表示するモーダルの内容を決定する状態[modal]
@@ -19,16 +21,24 @@ const BookResults: React.FC = () => {
   const [isModal, setIsModal] = useState<JSX.Element | false>(false)
 
   // 書籍が選択されたときに[modal]に表示すべきコンポーネントを設定する
-  const onClickInMedia = (props: { imgUrl: string; title: string }) => {
+  const onClickInMedia = (props: { imgUrl: string; book: BookItem }) => {
     return setModal(
       <BookModal
         props={{
           bookIcon: (
             <div className="el_bookModalImgWrapper">
               <img src={props.imgUrl} />
-              <p>{props.title}</p>
+              <p>{props.book.volumeInfo.title}</p>
             </div>
           ),
+          onSubmit: () =>
+            dispatch(
+              setFavoriteBook({
+                access_token: loginState.access_token,
+                book: props.book,
+              })
+            ),
+          isLogin: loginState.isLogin,
         }}
       />
     )
@@ -63,24 +73,23 @@ const BookResults: React.FC = () => {
     <BookResultsWrapper>
       {/* こいつがモーダルを表示するかしないかを決めている */}
       {isModal ? isModal : <></>}
-      {/* volumeInfoは配列なので，mapで一つ一つにアクセスし，それぞれのvolumeInfoを<BookMedia>に渡している */}
-      {volumeInfo.map((item, index) => {
-        // Google APIから送られてくるvolumeInfoにはimageLinksのない書籍もあるため，その場合にはNo Imageの画像を出力するように設定
+
+      {books.items.map((item, index) => {
+        const volumeInfo = item.volumeInfo
         const imgUrl =
           // imageLinksプロパティがvolumeInfoに含まれていれば,そのままvolumeInfo.imageLinks.thumbnailを表示し，
           // 含まれていなければ，No Imageが保存されているURLを使って，No Image画像を表示する
-          "imageLinks" in item
-            ? item.imageLinks.thumbnail
+          "imageLinks" in volumeInfo
+            ? volumeInfo.imageLinks.thumbnail
             : "https://drive.google.com/uc?id=1zuqJ4kYNcO5dijGJO8GHOszGBLhjUxdo&.png"
         return (
           <div key={index} className="el_bookMediaWrapper">
             <BookMedia
               props={{
-                volumeInfo: item,
+                volumeInfo: volumeInfo,
                 imgUrl: imgUrl,
                 // BookMediaにonClick関数を渡して，モーダルを表示できるようにする
-                onClick: () =>
-                  onClickInMedia({ imgUrl: imgUrl, title: item.title }),
+                onClick: () => onClickInMedia({ imgUrl: imgUrl, book: item }),
               }}
             />
           </div>
