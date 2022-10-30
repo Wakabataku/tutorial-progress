@@ -70,6 +70,7 @@ export const loginSlice = createSlice({
     // 完了したらそれぞれ更新をかける
     builder.addCase(getAccessTokenEvent.fulfilled, (state, action) => {
       state.load = false
+      state.isLogin = true
       state.access_token = action.payload.access_token
       state.name = action.payload.name
       state.picture = action.payload.picture

@@ -11,7 +11,7 @@ export const setBookRequest = async (props: {
     },
   }
   try {
-    return await axios.post("", props, config)
+    return await axios.post(process.env.REACT_APP_SET_URL, props, config)
   } catch (e: any) {
     throw new Error(e)
   }

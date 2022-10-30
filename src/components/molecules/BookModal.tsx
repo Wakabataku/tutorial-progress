@@ -11,8 +11,8 @@ const BookModal: React.FC<{
   }
 }> = ({ props }) => {
   const onClickSubmit = () => {
-    alert("書籍を登録しました。")
     props.onSubmit()
+    alert("書籍を登録しました。")
   }
   return (
     <BookModalWrapper>

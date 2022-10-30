@@ -4,9 +4,13 @@ admin.initializeApp(functions.config().firebase)
 
 // loginFuncのimport
 import { loginFunc } from "./functions/loginFunc"
+import { setBook } from "./functions/setBook"
 
 // firestoreデータベースの作成
 export const db = admin.firestore()
+// undefinedは登録しない設定
+db.settings({ ignoreUndefinedProperties: true })
 
 // index.ts上でexportした関数が，実際にクラウドサーバーにアップロードされる
 export const login = loginFunc
+export const set = setBook

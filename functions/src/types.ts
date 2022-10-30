@@ -114,8 +114,8 @@ export interface FuncSetBookResponse {
 export interface FsBook {
   id: string
   title: string
-  subtitle: string
-  description: string
-  thumbnail: string
-  smallThumbnail: string
+  subtitle?: string
+  description?: string
+  thumbnail?: string
+  smallThumbnail?: string
 }

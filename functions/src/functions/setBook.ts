@@ -64,11 +64,15 @@ export const setBook = functions
         id: bookData.id,
         volumeInfo: {
           title: bookData.title,
-          subtitle: bookData.subtitle,
-          description: bookData.description,
+          subtitle: bookData.subtitle ? bookData.subtitle : "",
+          description: bookData.description ? bookData.description : "",
           imageLinks: {
-            thumbnail: bookData.thumbnail,
-            smallThumbnail: bookData.smallThumbnail,
+            thumbnail: bookData.thumbnail
+              ? bookData
+              : "https://drive.google.com/uc?id=1zuqJ4kYNcO5dijGJO8GHOszGBLhjUxdo&.png",
+            smallThumbnail: bookData.smallThumbnail
+              ? bookData.smallThumbnail
+              : "",
           },
         },
       } as BookItem)
