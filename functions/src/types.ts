@@ -83,3 +83,39 @@ export class ErrorResponse extends Error {
     this.stack = error.stack
   }
 }
+
+// 書籍を検索を指示したときにかえってく書籍情報の型
+export interface VolumeInfo {
+  title: string
+  subtitle: string
+  description: string
+  imageLinks: {
+    thumbnail: string
+    smallThumbnail: string
+  }
+}
+
+// 書籍の型
+// 書籍にはidがあって，情報がある
+export interface BookItem {
+  id: string
+  volumeInfo: VolumeInfo
+}
+
+export interface FuncSetBookRequest {
+  book: BookItem
+  access_token: string
+}
+
+export interface FuncSetBookResponse {
+  books: BookItem[]
+}
+
+export interface FsBook {
+  id: string
+  title: string
+  subtitle: string
+  description: string
+  thumbnail: string
+  smallThumbnail: string
+}
