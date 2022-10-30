@@ -2,25 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { AxiosResponse } from "axios"
 
 import { getBooksRequest } from "../lib/getBooksRequest"
-
-// ここから，型の宣言
-// 書籍を検索を指示したときにかえってく書籍情報の型
-export interface VolumeInfo {
-  title: string
-  subtitle: string
-  description: string
-  imageLinks: {
-    thumbnail: string
-    smallThumbnail: string
-  }
-}
-
-// 書籍の型
-// 書籍にはidがあって，情報がある
-export interface BookItem {
-  id: string
-  volumeInfo: VolumeInfo
-}
+import { BookItem } from "../../functions/src/types"
 
 // エラーメッセージの型
 // エラーの処理は自分も勉強中のためテキトー．とりあえず無視

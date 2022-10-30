@@ -17,6 +17,7 @@ import storage from "redux-persist/lib/storage"
 // 上記で作成したbookSliceを読み込んでいる
 import bookReducer from "./bookSlice"
 import loginReducer from "./loginSlice"
+import favoriteBookReducer from "./favoriteBookSlice"
 
 // redux-persistの設定
 const persistConfig = {
@@ -34,6 +35,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   book: bookReducer,
   login: loginReducer,
+  favoriteBook: favoriteBookReducer,
 })
 
 // reducerをpersistする

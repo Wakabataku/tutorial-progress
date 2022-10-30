@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 
-import { VolumeInfo } from "../../store/bookSlice"
+import { VolumeInfo } from "../../../functions/src/types"
 
 const BookInfo: React.FC<{
   props: {

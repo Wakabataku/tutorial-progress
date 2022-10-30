@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react"
 import styled from "styled-components"
 
-import { VolumeInfo } from "../../store/bookSlice"
+import { VolumeInfo } from "../../../functions/src/types"
 import BookInfo from "../atoms/BookInfo"
 import Button from "../atoms/Button"
 import { useGetElementProperty } from "../../lib/useGetElementProperty"
