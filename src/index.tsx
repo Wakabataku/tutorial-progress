@@ -12,6 +12,8 @@ import App from "./components/pages/App"
 // Layoutはこれから作成
 import Layout from "./components/pages/Layout"
 
+import MyPage from "./components/pages/MyPage"
+
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 root.render(
   // Providerで囲った部分において，storeにアクセスできるようになる
@@ -22,6 +24,7 @@ root.render(
       <PersistGate loading={null} persistor={persistor}>
         <Routes>
           <Route path={"/"} element={<Layout Main={App} />} />
+          <Route path={"/mypage"} element={<Layout Main={MyPage} />} />
         </Routes>
       </PersistGate>
     </BrowserRouter>
